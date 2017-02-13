@@ -16,13 +16,17 @@ public class Main {
 		
 		
 		
-		Boat boatOne = new Boat("boatOne", 2);
-		Boat boatTwo = new Boat("boatTwo", 2);
-		Boat boatTree = new Boat("boatTree", 2);
+		Boat boatOne = new Boat("boatOne");
+		Boat boatTwo = new Boat("boatTwo");
+		Boat boatTree = new Boat("boatTree");
 		
-		boatOne.run();
-		boatTwo.run();
-		boatTree.run();
+		ExecutorService dock = Executors.newFixedThreadPool(2);
+		
+		dock.submit(boatOne);
+		dock.submit(boatTwo);
+		dock.submit(boatTree);
+		
+		dock.shutdown();
 		
 	
 		

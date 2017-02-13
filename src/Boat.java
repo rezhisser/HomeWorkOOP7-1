@@ -1,12 +1,9 @@
 import java.util.Arrays;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class Boat implements Runnable{
 	
 	protected Box box [] = new Box[10];
 	protected String name;
-	protected int countThread;
 
 	public Boat() {
 		super();
@@ -15,13 +12,15 @@ public class Boat implements Runnable{
 
 
 	
-	public Boat(String name, int countThread) {
+	public Boat(String name) {
 		super();
 		this.name = name;
 		for (int i = 0; i < box.length; i++) {
 			box[i] = new Box(i+1);
 		}
 	}
+	
+	
 
 
 
@@ -33,28 +32,22 @@ public class Boat implements Runnable{
 
 
 
-//	public void ShipUnloading(){
-//		for (Box box2 : box) {
-//			System.out.println(name + "/box N" + box2.getNumber() + " Unload");
-//		}
-//	}
-	
-	public void run(){
-		ExecutorService dock = Executors.newFixedThreadPool(countThread);
-		dock.submit(new Boat());
-		
+	public void ShipUnloading(){
 		for (Box box2 : box) {
 			System.out.println(name + "/box N" + box2.getNumber() + " Unload");
 		}
+	}
+	
+	public void run(){
+		
+		ShipUnloading();
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		dock.shutdown();
-		
+
 	}
 	
 
@@ -62,7 +55,6 @@ public class Boat implements Runnable{
 	public String toString() {
 		return "Boat [boat=" + Arrays.toString(box) + "]";
 	}
-
 	
 	
 	
